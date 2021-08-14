@@ -58,50 +58,18 @@ namespace OrderEcommerce.Infra.Repositories
 
         public Task<Entity> GetAsync(Guid id, CancellationToken cancellationToken)
             => _context.Set<Entity>().FindAsync(cancellationToken, id);
+        
+        public Entity Remove(Entity entityToRemove)
+            => _context.Set<Entity>().Remove(entityToRemove);   
 
-        public Task<IEnumerable<Entity>> GetAsync(Func<Entity, bool> predicateToUseInGet, int skip = 0, int offset = 0)
+        public bool Update(Entity entityToUpdate)
         {
-            throw new NotImplementedException();
-        }
+            if (entityToUpdate is null)
+                return false;
 
-        public Task<IEnumerable<Entity>> GetAsync(CancellationToken cancellationToken, Func<Entity, bool> predicateToUseInGet, int skip = 0, int offset = 0)
-        {
-            throw new NotImplementedException();
-        }
+            _context.Entry(entityToUpdate).State = EntityState.Modified;
 
-        public bool Remove(Entity entityToRemove)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Entity> RemoveAsync(Entity entityToRemove)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Entity> RemoveAsync(Entity entityToRemove, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Entity Update(Entity entityToUpdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Entity> UpdateAsync(Entity entityToUpdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Entity> UpdateAsync(Entity entityToUpdate, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        Entity IRepository<Entity>.Remove(Entity entityToRemove)
-        {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
