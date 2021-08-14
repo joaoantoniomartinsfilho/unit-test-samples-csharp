@@ -30,8 +30,5 @@ namespace OrderEcommerce.Domain.Repositories
 
         Task<Entity> UpdateAsync(Entity entityToUpdate);
         Task<Entity> UpdateAsync(Entity entityToUpdate, CancellationToken cancellationToken);
-
-        Task<Entity> CreateAsync(Entity entityToCreate);
-        Task<Entity> CreateAsync(Entity entityToCreate, CancellationToken cancellationToken);
     }
 }

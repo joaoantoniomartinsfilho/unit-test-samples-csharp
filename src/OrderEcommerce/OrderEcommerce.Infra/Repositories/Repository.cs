@@ -35,39 +35,29 @@ namespace OrderEcommerce.Infra.Repositories
             => _context.Set<Entity>().CountAsync(cancellationToken);
 
         public Entity Create(Entity entityToCreate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Entity> CreateAsync(Entity entityToCreate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Entity> CreateAsync(Entity entityToCreate, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Set<Entity>().Add(entityToCreate);
 
         public Entity Get(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        => _context.Set<Entity>().Find(id);
 
-        public IEnumerable<Entity> Get(Func<Entity, bool> predicateToUseInGet, int skip = 0, int offset = 0)
+        public IEnumerable<Entity> Get(Func<Entity, bool> predicateToUseInGet, int skip = default, int offset = default)
         {
-            throw new NotImplementedException();
+            var query = _context.Set<Entity>().Where(predicateToUseInGet).AsQueryable();
+
+            if (skip > 0)
+                query = query.Skip(skip);
+
+            if(offset > 0)
+                query = query.Take(offset);
+
+            return query;
         }
 
         public Task<Entity> GetAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Set<Entity>().FindAsync(id);
 
         public Task<Entity> GetAsync(Guid id, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Set<Entity>().FindAsync(cancellationToken, id);
 
         public Task<IEnumerable<Entity>> GetAsync(Func<Entity, bool> predicateToUseInGet, int skip = 0, int offset = 0)
         {
