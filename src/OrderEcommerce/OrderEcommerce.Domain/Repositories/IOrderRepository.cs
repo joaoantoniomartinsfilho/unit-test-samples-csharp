@@ -1,10 +1,11 @@
 ﻿using OrderEcommerce.Domain.Entities.OrderAggregate;
 using System;
+using System.Collections.Generic;
 
 namespace OrderEcommerce.Domain.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
-        OrderItem GetItemsFromOrder(Guid orderId);
+        IEnumerable<OrderItem> GetItemsByOrderId(Guid orderId);
     }
 }
